@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sevgiliye Özel Aşk Sayfası</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            padding: 20px;
+        }
+
+        /* 1. Şifre Giriş Ekranı */
+        .login-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .login-container h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .input-group {
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            padding: 5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .input-group input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 50px;
+            color: #333;
+        }
+
+        .input-group button {
+            background: #ff3366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .input-group button:hover {
+            background: #e60039;
+        }
+
+        .error-msg {
+            color: #ffe6e6;
+            font-size: 13px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* 2. Anılar / Yolculuk Ekranı */
+        .content-screen {
+            display: none;
+            width: 100%;
+            max-width: 450px;
+            padding-bottom: 40px;
+        }
+
+        .content-screen h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .timeline-card {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .timeline-card .heart-icon {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-card span {
+            font-size: 12px;
+            color: #e91e63;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .timeline-card h3 {
+            font-size: 18px;
+            color: #222;
+            margin: 5px 0 10px 0;
+        }
+
+        .timeline-card p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Şifre Ekranı -->
+    <div class="login-container" id="loginScreen">
+        <h2>Sevgilinizin sizin için özel olarak hazırlatmış olduğu bu lüks aşk sayfasına erişmek için şifrenizi girin </h2>
+        <div class="input-group">
+            <input type="password" id="passwordInput" placeholder="Şifre (Örn: Tarih)">
+            <button onclick="sifreyiKontrolEt()">🔐 Aç</button>
+        </div>
+        <div class="error-msg" id="errorMsg">Şifre yanlış, tekrar dene sevgilim! ❤️</div>
+    </div>
+
+    <!-- Anılar Ekranı -->
+    <div class="content-screen" id="contentScreen">
+        <h1>Anılarımızın Yolculuğu ✨</h1>
+        
+        <div class="timeline-card">
+            <div class="heart-icon">💖</div>
+            <span>9 Mayıs 2024</span>
+            <h3>Hikayemiz Başladı</h3>
+            <p>İlk kez gözlerinin içine baktığım an... O gün hayatım değişti. Sen benim en güzel başlangıcımsın[span_2](start_span)[span_2](end_span).</p>
+        </div>
+
+        <div class="timeline-card">
+            <div class="heart-icon">🌹</div>
+            <span>Unutulmaz Anlar</span>
+            <h3>Birlikte Güldüğümüz Günler</h3>
+            <p>Seninle geçirdiğim her saniye hayatımın en değerli anısı haline geliyor.</p>
+        </div>
+
+        <div class="timeline-card">
+            <div class="heart-icon">✨</div>
+            <span>Sonsuza Kadar</span>
+            <h3>Geleceğimiz</h3>
+            <p>Daha yazacak çok hikayemiz, biriktirecek çok anımız var. İyi ki varsın.</p>
+        </div>
+    </div>
+
+    <script>
+        // Buraya sitenin açılması için gereken şifreyi yazabilirsin (Örn: "0905" veya "09.05.2024")
+        const dogruSifre = "1453"; 
+
+        function sifreyiKontrolEt() {
+            const girilenDeger = document.getElementById('passwordInput').value;
+            const loginScreen = document.getElementById('loginScreen');
+            const contentScreen = document.getElementById('contentScreen');
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (girilenDeger === dogruSifre) {
+                loginScreen.style.display = 'none';
+                contentScreen.style.display = 'block';
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+    </script>
+
+</body>
+</html>
